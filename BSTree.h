@@ -2,6 +2,7 @@
 #define __BSTREE_H__
 
 #include <string>
+#include <iostream>
 #include "Node.h"
 
 class BSTree {
@@ -9,6 +10,7 @@ class BSTree {
         Node* root;
         void insert(Node*, const string&);
         bool search(Node*, const string& key) const;
+        int height(Node*, const string&) const;
 
     public:
         /* Constructors */

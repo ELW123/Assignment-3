@@ -92,3 +92,49 @@ string BSTree::smallest() const {
 
   return temp->getData();
 }
+
+int BSTree::height(const string& key) const {
+    if (!search(key))
+        return -1;
+
+    return height(root, key);
+}
+
+int BSTree::height(Node* node, const string& key) const {
+    // base case: node is the desired key; function finds height and exits
+    if (node->getData() == key) {
+        int leftHeight = 0;
+        int rightHeight = 0;
+        Node* temp = node;
+
+        while (temp->getLeft() != nullptr) {
+            leftHeight++;
+            temp = temp->getLeft();
+        }
+
+        while (temp->getRight() != nullptr) {
+            rightHeight++;
+            temp = temp->getRight();
+        }
+
+        if (leftHeight <= rightHeight)
+            return rightHeight;
+        else 
+            return leftHeight;
+    }
+    
+    else if (node->getData() < key) {
+        return height(node->getLeft(), key);
+    }
+
+    else if (node->getData() > key) {
+        return height(node->getRight(), key);
+    }
+}
+
+void BSTree::remove(const string &key) {
+    if (!search(key)) {
+        cout << "key does not exist!" << endl;
+        return;
+    }
+}
