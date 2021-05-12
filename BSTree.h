@@ -9,8 +9,9 @@ class BSTree {
     private:
         Node* root;
         void insert(Node*, const string&);
-        bool search(Node*, const string& key) const;
+        bool search(Node*, const string&) const;
         int height(Node*, const string&) const;
+        void remove(Node*, const string &);
 
     public:
         /* Constructors */

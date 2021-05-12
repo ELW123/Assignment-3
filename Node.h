@@ -17,6 +17,7 @@ class Node {
     Node* getRight();
     int getHeight();
     void setHeight(int);
+    int getCount();
     void incrementCount();
     void decrementCount();
  private:

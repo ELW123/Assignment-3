@@ -123,18 +123,61 @@ int BSTree::height(Node* node, const string& key) const {
             return leftHeight;
     }
     
-    else if (node->getData() < key) {
+    else if (key < node->getData()) {
         return height(node->getLeft(), key);
     }
 
-    else if (node->getData() > key) {
+    else if (key > node->getData()) {
         return height(node->getRight(), key);
     }
 }
 
-void BSTree::remove(const string &key) {
+void BSTree::remove(const string& key) {
+    // key is not in tree
     if (!search(key)) {
         cout << "key does not exist!" << endl;
         return;
     }
+
+    remove(root, key);
+}
+
+// remove function is still incomplete
+void BSTree::remove(Node* node, const string& key) {
+    if (node->getData() == key) {
+        // if count > 1
+        if (node->getCount() > 1) {
+            node->decrementCount();
+            return;
+        }
+
+        // if leaf node
+        if (node->getLeft() == nullptr && node->getRight() == nullptr) {
+            node = nullptr;
+            Node* temp = node;
+            delete temp;
+            return;
+        }
+
+        // if only left child
+        if (node->getLeft() != nullptr && node->getRight() == nullptr) {
+            node = node->getLeft();
+            return;
+        }
+
+        // if only right child
+        if (node->getLeft() == nullptr && node->getRight() != nullptr) {
+            node = node->getRight();
+            return;
+        }
+
+        // if two children
+    }
+    
+    // find location
+    else if (key < node->getData())
+        remove(node->getLeft(), key);
+
+    else if (key > node->getData())
+        remove(node->getRight(), key);
 }

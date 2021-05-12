@@ -38,6 +38,10 @@ void Node::setHeight(int h) {
    height = h;
 }
 
+int Node::getCount() {
+   return count;
+}
+
 void Node::incrementCount() {
    count++;
 }
