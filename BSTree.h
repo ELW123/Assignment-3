@@ -7,7 +7,8 @@
 class BSTree {
     private:
         Node* root;
-        void insert(Node*, const string);
+        void insert(Node*, const string&);
+        bool search(Node*, const string& key) const;
 
     public:
         /* Constructors */
