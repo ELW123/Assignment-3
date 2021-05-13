@@ -5,42 +5,31 @@ BSTree::BSTree() {
 }
 
 void BSTree::insert(const string& newString) {
-    insert(root, newString);
+    root = insert(root, newString);
 }
 
-void BSTree::insert(Node* node, const string& data) {
+Node* BSTree::insert(Node* node, const string& data) {
     // base case: node is nullptr
     if (node == nullptr) {
         Node* nodeInsert = new Node(data);
-        node = nodeInsert;
-        return;
+        return nodeInsert;
     }
-
+    
     if (data < node->getData()) {
-        /*
-        if (node->getLeft() == nullptr) {
-            Node* nodeInsert = new Node(data);
-            node->setLeft(nodeInsert);
-            return;
-        } */
-        insert(node->getLeft(), data);
+        node->setLeft(insert(node->getLeft(), data));
     }
 
     else if (data > node->getData()) {
-        /*
-        if (node->getRight() == nullptr) {
-            Node* nodeInsert = new Node(data);
-            node->setRight(nodeInsert);
-            return;
-        } */
-        insert(node->getRight(), data);
+        node->setRight(insert(node->getRight(), data));
     }
 
     // strings are equal
     else {
         node->incrementCount();
-        return;
+        return node;
     }
+
+    return node;
 }
 
 bool BSTree::search(const string& key) const {
