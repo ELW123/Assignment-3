@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 #include "BSTree.h"
+//#include "test_bst.h"
 
 using namespace std;
 
@@ -37,7 +38,7 @@ int menu() {
 
 int main( ) {
     // Pass all your tests before running the executable main
-    // run_tests();  // TODO: Remove before submitting
+    //run_tests();  // TODO: Remove before submitting
     //return 0;
 
     BSTree tree;
@@ -50,17 +51,39 @@ int main( ) {
     
         if (choice == 1) {
           cout << "Enter string to insert: ";
+          cin >> entry;
+          tree.insert(entry);
+          cout << endl;
         } else if (choice == 2) {
           cout << "Enter string to remove: ";
+          cin >> entry;
+          tree.remove(entry);
+          cout << endl;
         } else if (choice == 3) {
+          cout << "Preorder = ";
+          tree.preOrder(); 
+          cout << endl
+               << "Inorder = ";
+          tree.inOrder(); 
+          cout << endl
+               << "Postorder = "; 
+          tree.postOrder();
+          cout << endl;
         } else if (choice == 4) {
           cout << "Enter string to search for: ";
+          cin >> entry;
+          if (tree.search(entry))
+            cout << endl << "Found" << endl;
+          else
+            cout << endl << "Not Found" << endl;
         } else if (choice == 5) {
-          cout << "Smallest: " << endl;
+          cout << "Smallest: " << tree.smallest() << endl;
         } else if (choice == 6) {
-          cout << "Largest: " << endl;
+          cout << "Largest: " << tree.largest() << endl;
         } else if (choice == 7) {
-          cout << "Enter string: ";
+          cout << "Enter string: " << endl;
+          cin >> entry;
+          cout << "Height of subtree rooted at " << entry << ": " << tree.height(entry) << endl;
         }
         //fix buffer just in case non-numeric choice entered
         choice = menu();

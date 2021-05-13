@@ -125,7 +125,7 @@ void BSTree::remove(const string& key) {
     // key is not in tree
      
     if (!search(key)) {
-        cout << "key does not exist!" << endl;
+        //cout << "key does not exist!" << endl;
         return;
     }
 
@@ -145,8 +145,8 @@ void BSTree::remove(Node* node, const string& key) {
         // if leaf node
         if (node->getLeft() == nullptr && node->getRight() == nullptr) {
             node = nullptr;
-            Node* temp = node;
-            delete temp;
+            //Node* temp = node;
+            //delete node;
             return;
         }
 
@@ -264,4 +264,3 @@ void BSTree::postOrder(Node* currN)const {
         }
     }
 }
-
