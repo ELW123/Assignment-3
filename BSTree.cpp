@@ -14,7 +14,7 @@ Node* BSTree::insert(Node* node, const string& data) {
         Node* nodeInsert = new Node(data);
         return nodeInsert;
     }
-    
+
     if (data < node->getData()) {
         node->setLeft(insert(node->getLeft(), data));
     }
@@ -123,9 +123,9 @@ int BSTree::height(Node* node, const string& key) const {
 
 void BSTree::remove(const string& key) {
     // key is not in tree
-     
+
     if (!search(key)) {
-        //cout << "key does not exist!" << endl;
+        cout << "key does not exist!" << endl;
         return;
     }
 
@@ -134,45 +134,51 @@ void BSTree::remove(const string& key) {
 
 // remove function is still incomplete
 void BSTree::remove(Node* node, const string& key) {
-   
-    if (node->getData() == key) {
+
+    if (node == nullptr) // if the node given is null, return 
+        return;
+
+    if (node->getData() == key) { // if node's data is same as key, enter if statement
         // if count > 1
-        if (node->getCount() > 1) {
+        if (node->getCount() > 1) {  // if more than one, decrement, and return
             node->decrementCount();
             return;
         }
 
         // if leaf node
-        if (node->getLeft() == nullptr && node->getRight() == nullptr) {
+        if (node->getLeft() == nullptr && node->getRight() == nullptr) { //if leaf, delete that node
             node = nullptr;
-            //Node* temp = node;
-            //delete node;
+            Node* temp = node;
+            delete temp;
             return;
         }
 
         // if only left child
-        if (node->getLeft() != nullptr && node->getRight() == nullptr) {
-            node = node->getLeft();
+        if (node->getLeft() != nullptr && node->getRight() == nullptr) { //  check if only has left child
+            node->setData(node->getLeft()->getData());
+            delete node->getLeft();
             return;
         }
 
         // if only right child
         if (node->getLeft() == nullptr && node->getRight() != nullptr) {
-            node = node->getRight();
+            node->setData(node->getRight()->getData());
+            delete node->getRight();
+           
             return;
         }
 
         // if atleast two children
         else {
             Node* suc = node->getRight();
-            while (suc->getLeft() != nullptr) 
+            while (suc->getLeft() != nullptr)
                 suc = suc->getLeft();
             string holder = suc->getData();
             remove(suc, suc->getData());
             node->setData(holder);
             return;
         }
-       
+
 
     }
 
@@ -180,7 +186,7 @@ void BSTree::remove(Node* node, const string& key) {
     else if (key < node->getData())
         remove(node->getLeft(), key);
 
-    else if (key > node->getData())
+    else if (key > node->getData()) 
         remove(node->getRight(), key);
 
 }
@@ -210,15 +216,15 @@ void BSTree::inOrder(Node* currN)const {
             cout << currN->getData();
             cout << '(' << currN->getCount() << "), ";
         }
-       
+
         else {
 
-            
+
             inOrder(currN->getLeft());
             cout << currN->getData();
             cout << '(' << currN->getCount() << "), ";
             inOrder(currN->getRight());
-            
+
         }
     }
 }
@@ -255,7 +261,7 @@ void BSTree::postOrder(Node* currN)const {
             cout << currN->getData();
             cout << '(' << currN->getCount() << "), ";
         }
-       
+
         else {
             postOrder(currN->getLeft());
             postOrder(currN->getRight());
@@ -264,3 +270,4 @@ void BSTree::postOrder(Node* currN)const {
         }
     }
 }
+
