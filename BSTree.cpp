@@ -1,6 +1,6 @@
 #include "BSTree.h"
 
-BSTree::BSTree() { 
+BSTree::BSTree() {
     root = nullptr;
 }
 
@@ -8,14 +8,14 @@ void BSTree::insert(const string& newString) {
     insert(root, newString);
 }
 
-void BSTree::insert(Node* node, const string& data) {    
+void BSTree::insert(Node* node, const string& data) {
     // base case: node is nullptr
     if (node == nullptr) {
         Node* nodeInsert = new Node(data);
         node = nodeInsert;
         return;
     }
-    
+
     if (data < node->getData()) {
         /*
         if (node->getLeft() == nullptr) {
@@ -43,11 +43,11 @@ void BSTree::insert(Node* node, const string& data) {
     }
 }
 
-bool BSTree::search(const string &key) const {
-    search(root, key);
+bool BSTree::search(const string& key) const {
+    return search(root, key);
 }
 
-bool BSTree::search(Node* node, const string &key) const {
+bool BSTree::search(Node* node, const string& key) const {
     // base case: node is nullptr
     if (node == nullptr) {
         return false;
@@ -58,39 +58,39 @@ bool BSTree::search(Node* node, const string &key) const {
         return true;
 
     else if (key < node->getData()) {
-        
-        search(node->getLeft(), key);
+
+        return search(node->getLeft(), key);
     }
 
-    else if (key > node->getData()) {
-        search(node->getRight(), key);
-    }
+    else // if (key > node->getData()) {
+        return search(node->getRight(), key);
+    //}
 }
 
 string BSTree::largest() const {
     Node* temp = root;
-    
+
     if (temp == nullptr)
         return "";
-    
+
     while (temp->getRight() != nullptr) {
         temp = temp->getRight();
     }
 
-  return temp->getData();
+    return temp->getData();
 }
 
 string BSTree::smallest() const {
     Node* temp = root;
-    
+
     if (temp == nullptr)
         return "";
-    
+
     while (temp->getLeft() != nullptr) {
         temp = temp->getLeft();
     }
 
-  return temp->getData();
+    return temp->getData();
 }
 
 int BSTree::height(const string& key) const {
@@ -119,21 +119,22 @@ int BSTree::height(Node* node, const string& key) const {
 
         if (leftHeight <= rightHeight)
             return rightHeight;
-        else 
+        else
             return leftHeight;
     }
-    
+
     else if (key < node->getData()) {
         return height(node->getLeft(), key);
     }
 
-    else if (key > node->getData()) {
+    else //if (key > node->getData()) {
         return height(node->getRight(), key);
-    }
+    //}
 }
 
 void BSTree::remove(const string& key) {
     // key is not in tree
+     
     if (!search(key)) {
         cout << "key does not exist!" << endl;
         return;
@@ -144,6 +145,7 @@ void BSTree::remove(const string& key) {
 
 // remove function is still incomplete
 void BSTree::remove(Node* node, const string& key) {
+   
     if (node->getData() == key) {
         // if count > 1
         if (node->getCount() > 1) {
@@ -171,13 +173,106 @@ void BSTree::remove(Node* node, const string& key) {
             return;
         }
 
-        // if two children
+        // if atleast two children
+        else {
+            Node* suc = node->getRight();
+            while (suc->getLeft() != nullptr) 
+                suc = suc->getLeft();
+            string holder = suc->getData();
+            remove(suc, suc->getData());
+            node->setData(holder);
+            return;
+        }
+       
+
     }
-    
+
     // find location
     else if (key < node->getData())
         remove(node->getLeft(), key);
 
     else if (key > node->getData())
         remove(node->getRight(), key);
+
 }
+
+
+
+
+void BSTree::inOrder() const {
+    inOrder(root);
+}
+
+void BSTree::preOrder() const {
+    preOrder(root);
+}
+
+void BSTree::postOrder()const {
+    postOrder(root);
+}
+
+void BSTree::inOrder(Node* currN)const {
+    if (currN == nullptr)
+        return;
+
+
+    else {
+        if ((currN->getLeft() == 0) && (currN->getRight() == 0)) {
+            cout << currN->getData();
+            cout << '(' << currN->getCount() << "), ";
+        }
+       
+        else {
+
+            
+            inOrder(currN->getLeft());
+            cout << currN->getData();
+            cout << '(' << currN->getCount() << "), ";
+            inOrder(currN->getRight());
+            
+        }
+    }
+}
+
+
+void BSTree::preOrder(Node* currN)const {
+    if (currN == nullptr)
+        return;
+
+    else {
+        if ((currN->getLeft() == 0) && (currN->getRight() == 0)) {
+            cout << currN->getData();
+            cout << '(' << currN->getCount() << "), ";
+        }
+
+        else {
+            cout << currN->getData();
+            cout << '(' << currN->getCount() << "), ";
+            preOrder(currN->getLeft());
+            preOrder(currN->getRight());
+        }
+    }
+}
+
+
+
+
+void BSTree::postOrder(Node* currN)const {
+    if (currN == nullptr)
+        return;
+
+    else {
+        if ((currN->getLeft() == 0) && (currN->getRight() == 0)) {
+            cout << currN->getData();
+            cout << '(' << currN->getCount() << "), ";
+        }
+       
+        else {
+            postOrder(currN->getLeft());
+            postOrder(currN->getRight());
+            cout << currN->getData();
+            cout << '(' << currN->getCount() << "), ";
+        }
+    }
+}
+
