@@ -1,3 +1,4 @@
+#pragma once
 #ifndef Node_H_
 #define Node_H_
 
@@ -7,7 +8,7 @@ using namespace std;
 
 class Node {
 
- public:
+public:
     Node(string);
     ~Node() {}
     string getData();
@@ -20,10 +21,11 @@ class Node {
     int getCount();
     void incrementCount();
     void decrementCount();
- private:
+    void setData(string);
+private:
     string data;
-    Node *left;
-    Node *right;
+    Node* left;
+    Node* right;
     int height;
     int count;
 };
