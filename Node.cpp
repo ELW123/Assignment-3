@@ -3,49 +3,53 @@
 using namespace std;
 
 Node::Node(string k) {
-   data = k;
-   left = nullptr;
-   right = nullptr;
-   height = 1;
-   count = 1;
+	data = k;
+	left = nullptr;
+	right = nullptr;
+	height = 1;
+	count = 1;
 }
 
 string Node::getData() {
-   return data;
+	return data;
 }
 
-void Node::setLeft(Node* left){
-   this->left = left;
+void Node::setLeft(Node* left) {
+	this->left = left;
 }
 
-Node* Node::getLeft(){
-   return left;
+Node* Node::getLeft() {
+	return left;
 }
 
-void Node::setRight(Node* right){
-   this->right= right;
+void Node::setRight(Node* right) {
+	this->right = right;
 }
 
-Node* Node::getRight(){
-   return right;
+Node* Node::getRight() {
+	return right;
 }
 
 int Node::getHeight() {
-   return height;
+	return height;
 }
 
 void Node::setHeight(int h) {
-   height = h;
+	height = h;
 }
 
 int Node::getCount() {
-   return count;
+	return count;
 }
 
 void Node::incrementCount() {
-   count++;
+	count++;
 }
 
 void Node::decrementCount() {
-   count--;
+	count--;
+}
+
+void Node::setData(string d) {
+	data = d;
 }
