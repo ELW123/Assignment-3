@@ -6,7 +6,8 @@ Node::Node(string k) {
 	data = k;
 	left = nullptr;
 	right = nullptr;
-	height = 1;
+	parent = nullptr;
+	height = 0;		// initial 0 as leaf node
 	count = 1;
 }
 
@@ -28,6 +29,14 @@ void Node::setRight(Node* right) {
 
 Node* Node::getRight() {
 	return right;
+}
+
+void Node::setParent(Node* parent) {
+	this->parent = parent;
+}
+
+Node* Node::getParent() {
+	return parent;
 }
 
 int Node::getHeight() {

@@ -11,7 +11,11 @@ private:
     Node* root;
     Node* insert(Node*, const string&);
     bool search(Node*, const string&) const;
+    Node* locate(Node*, const string&) const;
     int height(Node*, const string&) const;
+	int updateHeightAndParent(Node*) const;
+	Node* findMin(Node*) const;
+	Node* findMax(Node*) const;
     void remove(Node*, const string&);
     void inOrder(Node*)const; //helper function
     void preOrder(Node*)const; //helper function

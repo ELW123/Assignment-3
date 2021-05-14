@@ -47,16 +47,17 @@ int main( ) {
 
     string entry;
   
+	//freopen("test.txt","r",stdin);
     while (choice != 8) {
     
         if (choice == 1) {
           cout << "Enter string to insert: ";
-          cin >> entry;
+          getline(cin, entry);
           tree.insert(entry);
           cout << endl;
         } else if (choice == 2) {
           cout << "Enter string to remove: ";
-          cin >> entry;
+          getline(cin, entry);
           tree.remove(entry);
           cout << endl;
         } else if (choice == 3) {
@@ -71,7 +72,7 @@ int main( ) {
           cout << endl;
         } else if (choice == 4) {
           cout << "Enter string to search for: ";
-          cin >> entry;
+          getline(cin, entry);
           if (tree.search(entry))
             cout << endl << "Found" << endl;
           else
@@ -82,7 +83,7 @@ int main( ) {
           cout << "Largest: " << tree.largest() << endl;
         } else if (choice == 7) {
           cout << "Enter string: " << endl;
-          cin >> entry;
+          getline(cin, entry);
           cout << "Height of subtree rooted at " << entry << ": " << tree.height(entry) << endl;
         }
         //fix buffer just in case non-numeric choice entered

@@ -16,8 +16,11 @@ public:
     Node* getLeft();
     void setRight(Node*);
     Node* getRight();
+    void setParent(Node*);
+    Node* getParent();
     int getHeight();
     void setHeight(int);
+	void updateHeight(Node*);
     int getCount();
     void incrementCount();
     void decrementCount();
@@ -26,6 +29,7 @@ private:
     string data;
     Node* left;
     Node* right;
+    Node* parent;
     int height;
     int count;
 };
