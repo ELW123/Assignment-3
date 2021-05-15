@@ -298,12 +298,12 @@ void BSTree::inOrder(Node* currN)const {
 
 
     else {
-        /*if ((currN->getLeft() == 0) && (currN->getRight() == 0)) {
+        if ((currN->getLeft() == 0) && (currN->getRight() == 0)) {
             cout << currN->getData();
             cout << '(' << currN->getCount() << "), ";
         }
        
-        else { */
+        else {
 
             
             inOrder(currN->getLeft());
@@ -311,7 +311,7 @@ void BSTree::inOrder(Node* currN)const {
             cout << '(' << currN->getCount() << "), ";
             inOrder(currN->getRight());
             
-        //}
+        }
     }
 }
 
@@ -321,17 +321,17 @@ void BSTree::preOrder(Node* currN)const {
         return;
 
     else {
-        /*if ((currN->getLeft() == 0) && (currN->getRight() == 0)) {
+        if ((currN->getLeft() == 0) && (currN->getRight() == 0)) {
             cout << currN->getData();
             cout << '(' << currN->getCount() << "), ";
         }
 
-        else { */
+        else {
             cout << currN->getData();
             cout << '(' << currN->getCount() << "), ";
             preOrder(currN->getLeft());
             preOrder(currN->getRight());
-        //}
+        }
     }
 }
 
@@ -340,17 +340,17 @@ void BSTree::postOrder(Node* currN)const {
         return;
 
     else {
-        /*if ((currN->getLeft() == 0) && (currN->getRight() == 0)) {
+        if ((currN->getLeft() == 0) && (currN->getRight() == 0)) {
             cout << currN->getData();
             cout << '(' << currN->getCount() << "), ";
         }
        
-        else { */
+        else {
             postOrder(currN->getLeft());
             postOrder(currN->getRight());
             cout << currN->getData();
             cout << '(' << currN->getCount() << "), ";
-        //}
+        }
     }
 }
 
