@@ -166,26 +166,22 @@ void BSTree::remove(const string& key) {
 			root = nullptr;
 			return;
 		}
-        // if only left child
-        if (root->getLeft() != nullptr && root->getRight() == nullptr) {
-			Node* tmp = root;
-			root = root->getLeft();
-			root->setParent(nullptr);
-			delete tmp;
-			tmp = nullptr;
-			return;
-		}
-        // if only right child
-        if (root->getLeft() == nullptr && root->getRight() != nullptr) {
-			Node* tmp = root;
-			root = root->getRight();
-			root->setParent(nullptr);
-			delete tmp;
-			tmp = nullptr;
-			return;
-		}
-        // if has both child
-        if (root->getLeft() != nullptr && root->getRight() != nullptr) {
+        // if has left child
+        if (root->getLeft() != nullptr) {
+			// use predecessor as suggested in instruction
+            Node* pre = findMax(root->getLeft());
+            string holder = pre->getData();
+			int pre_count = pre->getCount();
+			pre->setCount(1);	// force it to 1 to delete it, not countdown
+            remove(pre, pre->getData());
+            root->setData(holder);
+			root->setCount(pre_count);
+			updateHeightAndParent(root);		// update height & parent
+            return;
+        }
+        // if has right child
+        if (root->getRight() != nullptr) {
+			// use successor as suggested in instruction
             Node* suc = findMin(root->getRight());
             string holder = suc->getData();
 			int suc_count = suc->getCount();
@@ -193,8 +189,9 @@ void BSTree::remove(const string& key) {
             remove(suc, suc->getData());
             root->setData(holder);
 			root->setCount(suc_count);
+			updateHeightAndParent(root);		// update height & parent
             return;
-		}
+        }
 	}
 
     remove(root, key);
@@ -228,38 +225,22 @@ void BSTree::remove(Node* node, const string& key) {
             return;
         }
 
-        // if only left child
-        if (node->getLeft() != nullptr && node->getRight() == nullptr) {
-			Node* nodeparent = node->getParent();
-			if (nodeparent != nullptr) {
-				if (nodeparent->getData() < node->getLeft()->getData()) {
-					nodeparent->setLeft(node->getLeft());
-				} else {
-					nodeparent->setRight(node->getLeft());
-				}
-			}
-			delete node;
-			node=nullptr;
+        // if has left child
+        if (node->getLeft() != nullptr) {
+			// use predecessor as suggested in instruction
+            Node* pre = findMax(node->getLeft());
+            string holder = pre->getData();
+			int pre_count = pre->getCount();
+			pre->setCount(1);	// force it to 1 to delete it, not countdown
+            remove(pre, pre->getData());
+            node->setData(holder);
+			node->setCount(pre_count);
             return;
         }
 
-        // if only right child
-        if (node->getRight() != nullptr && node->getLeft() == nullptr) {
-			Node* nodeparent = node->getParent();
-			if (nodeparent != nullptr) {
-				if (nodeparent->getData() < node->getRight()->getData()) {
-					nodeparent->setRight(node->getRight());
-				} else {
-					nodeparent->setLeft(node->getRight());
-				}
-			}
-			delete node;
-			node=nullptr;
-            return;
-        }
-
-        // if  two children
-        else {
+        // if has right child
+        if (node->getRight() != nullptr) {
+			// use successor as suggested in instruction
             Node* suc = findMin(node->getRight());
             string holder = suc->getData();
 			int suc_count = suc->getCount();

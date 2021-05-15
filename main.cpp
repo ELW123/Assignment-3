@@ -88,6 +88,6 @@ int main( ) {
         //fix buffer just in case non-numeric choice entered
         choice = menu();
     }
-	freopen("test.txt","r",stdin);
+	//freopen("test.txt","r",stdin);
     return 0;
 }
