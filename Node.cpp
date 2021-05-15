@@ -51,6 +51,10 @@ int Node::getCount() {
 	return count;
 }
 
+void Node::setCount(int c) {
+	count = c;
+}
+
 void Node::incrementCount() {
 	count++;
 }

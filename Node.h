@@ -22,6 +22,7 @@ public:
     void setHeight(int);
 	void updateHeight(Node*);
     int getCount();
+    void setCount(int);
     void incrementCount();
     void decrementCount();
     void setData(string);
